@@ -1,0 +1,52 @@
+.footer-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.background-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to top, #030615, rgba(255, 255, 255, 0))
+}
+
+.info-button {
+  height: 30px;
+  width: 30px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 1rem;
+  transition-duration: 200ms;
+}
+
+.info-button:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.info-button i {
+  font-size: 1.4rem;
+}
+
+.footer-container h2 {
+  font-size: 1.4rem;
+}
+
+.footer-container h1 {
+  font-size: 0.9rem;
+  font-weight: 200;
+}
+
+.footer-container div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}

@@ -1,0 +1,12 @@
+.picture {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  object-fit: cover;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
