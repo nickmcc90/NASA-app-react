@@ -7,7 +7,7 @@ import './styles/app.css'
 function App() {
 
 
-  const [data, setData] = useState(null) // this will be filled with a data request upon loading.
+  const [data, setData] = useState(null) // this will be filled with a data request upon loading the page.
   const [loading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
@@ -21,23 +21,40 @@ function App() {
       const url = 'https://api.nasa.gov/planetary/apod' +
       `?api_key=${NASA_KEY}`
 
+
+      //cache data clause
+      const today = (new Date()).toDateString();  // this grabs todays date.
+      const localKey = `NASA-${today}`;       // this turns today's date into a key
+      if(localStorage.getItem(localKey)) {    // if this key exists in our local storage (if it does then we've already put data inside it, we don't want to access the API twice for the same thing)...
+        const apiData = JSON.parse(localStorage.getItem(localKey))    // we can access the data from the key and..
+        setData(apiData)        // have our data that way. This process caches data from each date that the page is loaded.
+        console.log("Grabbed from cache today");
+        console.log(today);
+        return
+      }
+      // if we make it here in the code, then data hasn't been accessed today, so we clear the storage
+
+      localStorage.clear()  // this clears out past dates that won't be used anymore
+
+
       try {
         const res = await fetch(url)
         const apiData = await res.json()
+        localStorage.setItem(localKey, JSON.stringify(apiData))
         setData(apiData)
-        console.log('DATA\n', apiData)
+        console.log("Grabbed from API today");
       } catch(err) {
         console.log(err.message);
       }
     }
 
     fetchAPIData();
-  })
+  }, [])
 
   return (
     <>
       {/* If the data has been retrieved (is true) the NASA picture will load in the back */}
-      {data ? (<Main />): (
+      {data ? (<Main data={data}/>): (
         <div className='loading-state'>
           <i className="fa-solid fa-gear"></i>
         </div>
@@ -139,4 +156,25 @@ If the data is not retrieved, then instead of Main we can have a div that displa
 Look to app.css for the animation syntax.
 
 We can pass the api data into the sidebar and the footer now!
+
+I accidentally ran up all my API calls for the NASA API because I didn't add a dependency array to the
+useEffect function haha! Now I need to wait an hour to see the data show up, but I believe it works.
+
+All we did in the tutorial was do a little bit more styling. Now it is time to cache the information.
+
+Caching information serves the purpose of only needing to call the API when necessary. If you've never
+called the API before, calling it for the first time is needed. If you keep refreshing the page, then
+you will keep calling the API, which we don't want. We want to store the information gathered by the API
+on the first time that we call it, so that if we refresh the page we can grab the information from
+localStorage. To figure out if we've already called the API before, we can start by assigning a localKey to the api
+call data in the form of today's date. There is new information available everyday, so one call to the API
+per day is necessary.
+
+At every page reload, we store today's date in a key, then see if that key exists in localStorage. If it does,
+then we grab data from localstorage with const ddd = JSON.parse(localStorage.getItem(localKey)). 
+
+If we've never called the API today (the key doesn't exist), we first do a localStorage.clear()
+Then, we grab info from the API, then before setting the api data inside of
+the state variable, we setItem the api data into the key we created at the beginning of the page reload.
+This ensures that there is a key with today's date that has the info we need. 
 */
