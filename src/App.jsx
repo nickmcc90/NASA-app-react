@@ -84,7 +84,7 @@ With box-sizing, the height of 100px would be height+padding+border = 100px;
 Adding a display flex and flex-direction: column to the picture makes it more responsive when we resize the page.
 
 It seems like styling an entire component through going to index.css and using the tag name is quicker than going
-to that component's main wrapping div and styling it through an individual css page.
+to that component's main wrapping div and styling it through an individual css page. This didn't work for me though.
 
 inset: 0; means something will expand to the full width of its parent container.
 
@@ -96,7 +96,8 @@ we give the sidebar a higher z-index.
 First, we planned out the mobile version of the app by having the sidebar be inset and position: fixed, 
 and have its contents take up 80% of the screen and margin-left: auto. When in a laptop or bigger screen,
 we change the sidebar to being position relative (it snaps back into a flex box with the main picture), taking
-the inset away, and having it have a width of 30%. With the contents, we margin: unset.
+the inset away, and having it have a width of 30%. With the contents, we margin: unset and have the max-width
+of the contents be 100%.
 
 Now we have to make the page such that the sidebar is conditionally displayed. My inital idea is to
 have the button access a media query? A button that toggles a styling class on the sidebar. This might

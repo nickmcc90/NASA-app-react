@@ -22,7 +22,7 @@
   overflow-y: scroll;
   position: relative;
   height: 100%;
-  width: 80%;
+  width: 100%;
   max-width: 800px;
   margin-left: auto;
   background-color: #030615;
@@ -74,10 +74,12 @@
     inset: unset;
     box-shadow: 0 0 40px 1px #030615;
     z-index: 10;
+    max-height: 100vh;
   }
 
   .sidebar-contents {
     margin: unset;
     z-index: 15;
+    max-width: 100%;
   }
 }
