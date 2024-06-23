@@ -142,6 +142,7 @@ will attach this to a button.
 Weird thing: I don't know how to get the i button to disappear after hitting it with a large screen.
 The footer is fixed, and when the modal pops up in a large screen it is relative. Hmmmmm. I don't
 think James the Youtuber saw how the button operated in full screen.
+FIXED: we need to make the sidebar-contents the entire width to cover everything behind it.
 
 Timestamp: 1:24:00
 
@@ -168,9 +169,10 @@ called the API before, calling it for the first time is needed. If you keep refr
 you will keep calling the API, which we don't want. We want to store the information gathered by the API
 on the first time that we call it, so that if we refresh the page we can grab the information from
 localStorage. To figure out if we've already called the API before, we can start by assigning a localKey to the api
-call data in the form of today's date. There is new information available everyday, so one call to the API
-per day is necessary.
+call data in the form of today's date. There is new information available once every day, so one call to the API
+per day is all we need.
 
+WITHIN useEffect:
 At every page reload, we store today's date in a key, then see if that key exists in localStorage. If it does,
 then we grab data from localstorage with const ddd = JSON.parse(localStorage.getItem(localKey)). 
 
