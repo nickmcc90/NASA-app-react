@@ -1,21 +1,49 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Main from './components/main'
 import Footer from './components/footer'
 import Sidebar from './components/sidebar'
+import './styles/app.css'
 
 function App() {
 
+
+  const [data, setData] = useState(null) // this will be filled with a data request upon loading.
+  const [loading, setLoading] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
   function handleToggleModal() {
     setShowModal(!showModal)
   }
 
+  useEffect(() => {
+    async function fetchAPIData() {
+      const NASA_KEY = import.meta.env.VITE_NASA_API_KEY
+      const url = 'https://api.nasa.gov/planetary/apod' +
+      `?api_key=${NASA_KEY}`
+
+      try {
+        const res = await fetch(url)
+        const apiData = await res.json()
+        setData(apiData)
+        console.log('DATA\n', apiData)
+      } catch(err) {
+        console.log(err.message);
+      }
+    }
+
+    fetchAPIData();
+  })
+
   return (
     <>
-      <Main />
-      { showModal && (<Sidebar handleToggleModal={handleToggleModal} />)}
-      <Footer handleToggleModal={handleToggleModal}/>
+      {/* If the data has been retrieved (is true) the NASA picture will load in the back */}
+      {data ? (<Main />): (
+        <div className='loading-state'>
+          <i className="fa-solid fa-gear"></i>
+        </div>
+      )}
+      { showModal && (<Sidebar handleToggleModal={handleToggleModal} data={data}/>)}
+      {data && (<Footer handleToggleModal={handleToggleModal} data={data} />)}
     </>
   )
 }
@@ -98,4 +126,17 @@ The footer is fixed, and when the modal pops up in a large screen it is relative
 think James the Youtuber saw how the button operated in full screen.
 
 Timestamp: 1:24:00
+
+We created a .env file to store our API KEY in a variable that we access in App.js with that typa syntax.
+
+
+We fetch data from APIs in react using useEffect.
+
+We set the fetched data to a state variable, and make the components in the app conditionally render
+based on if the data is true or not (has been fetched)
+
+If the data is not retrieved, then instead of Main we can have a div that displays a turning cog wheel.
+Look to app.css for the animation syntax.
+
+We can pass the api data into the sidebar and the footer now!
 */

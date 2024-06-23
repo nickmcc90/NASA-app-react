@@ -2,7 +2,7 @@ import '../styles/footer.css'
 
 export default function Footer(props) {
 
-  const { handleToggleModal } = props;
+  const { handleToggleModal, data } = props;
 
   return (
     <div className="footer-container">
