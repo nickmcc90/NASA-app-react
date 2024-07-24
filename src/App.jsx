@@ -15,6 +15,7 @@ function App() {
     setShowModal(!showModal)
   }
 
+  // we load the NASA data into the frontend on page load either from API, or cache
   useEffect(() => {
     async function fetchAPIData() {
       const NASA_KEY = import.meta.env.VITE_NASA_API_KEY
@@ -70,8 +71,6 @@ export default App
 
 /* 
 This is the beginning of the app. 
-
-Timestamp: 54:08.
 
 In index.css, the * symbol selects everything. We can set the padding and margin to 0 to have everything flush
 with the borders on the screen. Box-sizing ensures that the width and height of everything on the page incorporates
@@ -144,7 +143,6 @@ The footer is fixed, and when the modal pops up in a large screen it is relative
 think James the Youtuber saw how the button operated in full screen.
 FIXED: we need to make the sidebar-contents the entire width to cover everything behind it.
 
-Timestamp: 1:24:00
 
 We created a .env file to store our API KEY in a variable that we access in App.js with that typa syntax.
 
