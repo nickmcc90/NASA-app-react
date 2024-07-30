@@ -1,8 +1,12 @@
-# React + Vite
+# NASA-app : Made with React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This app is able to display new images and details from the NASA APOD API everyday. A nice showing of frontend skills.
 
-Currently, two official plugins are available:
+## Things I learned from this project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Skills learned: 
+How to...
+* Pull data from an API to display nicely in a React frontend
+* Cache data from API calls as to not incur costs or exceed call limits
+
+
